@@ -21,35 +21,76 @@ const banderillas = data => {
         const {name, capital, region, flags } = item;
         const {common, official} = name;
         const {svg} = flags;
-        
-        // let lengua = Object.values(item?.languages)
 
-        //console.log('lenguas', lengua)
+        if( item.languages != null) {
+            lenguaRes = arregloData(item.languages)
+        }
+
+        let lenguajes = ""
+        lenguaRes.forEach(element => {
+            lenguajes += element + " ";
+        });
+        
+        if(item.currencies != null){
+            monedaRes = arregloData(item.currencies)
+            
+        }
+
+        let borders = item.borders;
+        
+        
+        if (borders!=null){
+            limitrofes = arregloData(borders)
+            
+        }
+
+        let paises = "";
+        limitrofes.forEach(pais=>{
+            console.log(pais)
+            paises += pais + " ";
+            // let nombrePaises = new Intl.DisplayNames(['en'], {type: 'region'});
+            // console.log(nombrePaises.of(pais))
+            
+        })
+
         elementos += `
         <article class="card">
             <img src="${svg}" alt="bandera" class="img-fluid">
             <div class="card-content">
                 <h3>${common}</h3>
                 <p>
-                    <b>Capital: ${capital}</b>
+                <b>Capital:</b> ${capital}
                 </p>
                 <p>
-                    <b>Nombre completo del pais: ${official}</b>
+                    <b>Official Name:</b> ${official}
                 </p>
                 <p>
-                    <b>Region: ${region}</b>
+                    <b>Region:</b> ${region}
                 </p>
                 <p>
-                    <b>Paises limitrofes:</b>
+                    <b>Borders:</b> ${paises}
                 </p>
                 <p>
-                    <b>Lengua: ${item?.languages}</b>
+                    <b>Languages:</b> ${lenguajes}
                 </p>
                 <p>
-                    <b>Nombre y simbolo de moneda:</b>
+                    <b>Currencies:</b> ${monedaRes[0].name} ,${monedaRes[0].symbol} 
                 </p>
             </div>
         </article>`
     });
     banderas.innerHTML = elementos
+}
+
+
+function arregloData( data ) {
+    let dataObjeto = data 
+    let leng_array = Object.keys(dataObjeto ).map(
+        function (key) {
+        let elemento = dataObjeto [key];
+        elemento.id = key;
+        return elemento;
+        }
+      )
+    return leng_array 
 }
