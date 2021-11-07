@@ -74,7 +74,7 @@ const banderillas = data => {
                     <b>Languages:</b> ${lenguajes}
                 </p>
                 <p>
-                    <b>Currencies:</b> ${monedaRes[0].name} ,${monedaRes[0].symbol} 
+                    <b>Currencies:</b> ${monedaRes[0].name}, ${monedaRes[0].symbol} 
                 </p>
             </div>
         </article>`
